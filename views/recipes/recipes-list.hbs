@@ -5,8 +5,8 @@
     <ul>
         {{#each recipes}}
         
-            <li>{{this.name}} - {{this.cuisine}} <a href="/recipe/edit/{{this._id}}">Edit Recipe</a>
-             <a href="/recipe/delete/{{this._id}}">Delete Recipe</a>
+            <li><p>{{this.name}}</p>  <div><img src="{{this.imageUrl}}" alt="food photos"> </div>
+            <a href="/recipe/edit/{{this._id}}">Edit </a> <a href="/recipe/delete/{{this._id}}">Delete </a>
             </li>
                         
 

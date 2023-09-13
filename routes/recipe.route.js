@@ -1,22 +1,28 @@
 const express = require("express");
 const recipeRouter = express.Router();
 const Recipe = require("../models/Recipe.model.js");
+const fileUploader = require("../config/cloudinary.config");
 
 //Adding recipe
 recipeRouter.get("/recipe/create", function (req, res, next) {
   res.render("recipes/add-recipe");
 });
 
-recipeRouter.post("/recipe/create", (req, res, next) => {
-  const { name, ingredients, instructions } = req.body;
-  console.log(req.body);
-  Recipe.create({ name, ingredients, instructions })
-    .then((recipeFromDB) => {
-      console.log(`New recipe created: ${recipeFromDB.name}.`);
-      res.redirect("/recipe/list"); // Redirect to a list page after creation
-    })
-    .catch((error) => next(error));
-});
+recipeRouter.post(
+  "/recipe/create",
+  fileUploader.single("recipe-cover-image"),
+  (req, res, next) => {
+    const { name, ingredients, instructions } = req.body;
+    console.log(req.body);
+    console.log(req.file.path);
+    Recipe.create({ name, ingredients, instructions, imageUrl: req.file.path })
+      .then((recipeFromDB) => {
+        console.log(`New recipe created: ${recipeFromDB.name}.`);
+        res.redirect("/recipe/list"); // Redirect to a list page after creation
+      })
+      .catch((error) => next(error));
+  }
+);
 
 //  GET recipe listing.
 recipeRouter.get("/recipe/list", function (req, res, next) {
