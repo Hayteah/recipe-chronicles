@@ -3,6 +3,7 @@ const recipeRouter = express.Router();
 const Recipe = require("../models/Recipe.model.js");
 const fileUploader = require("../config/cloudinary.config");
 const axios = require('axios');
+const User = require('../models/User.model.js')
 
 
 
@@ -121,6 +122,27 @@ recipeRouter.post("/recipe/delete/:recipeId", function (req, res, next) {
       res.redirect("/recipe/list"); // Redirect to the list page after deletion
     })
     .catch((error) => next(error));
+});
+
+recipeRouter.post("/recipe/favorites", function (req, res, next) {
+  User.findByIdAndUpdate(
+    req.session.currentUser._id,
+    { $push: { favourites: req.body.favorite } }, { new: true }
+  )
+    .then((updatedUser) => {
+      console.log(updatedUser)
+    })
+
+  // Recipe.findByIdAndDelete(recipeId)
+  //   .then((deletedRecipe) => {
+  //     if (!deletedRecipe) {
+  //       return res.status(404).send("Recipe not found");
+  //     }
+
+  //     console.log(`Recipe deleted: ${deletedRecipe.name}`);
+  //     res.redirect("/recipe/list"); // Redirect to the list page after deletion
+  //   })
+  //   .catch((error) => next(error));
 });
 
 module.exports = recipeRouter;

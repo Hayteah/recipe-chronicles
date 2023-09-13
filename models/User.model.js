@@ -17,10 +17,11 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true
     },
-   passwordHash: {
+    passwordHash: {
       type: String,
       required: [true, 'Password is required.']
-    }
+    },
+    favourites: []
   },
   {
     timestamps: true
