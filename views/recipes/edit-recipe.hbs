@@ -1,0 +1,32 @@
+<body>
+  <h1>Edit Recipe</h1>
+  <form
+    action="/recipe/update/{{recipe._id}}"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <label for="name">Recipe Name:</label>
+    <input type="text" name="name" value="{{recipe.name}}" required /><br /><br
+    />
+
+    <label for="ingredients">Ingredients:</label>
+    <textarea
+      name="ingredients"
+      rows="4"
+      required
+    >{{recipe.ingredients}}</textarea><br /><br />
+
+    <label for="instructions">Instructions:</label>
+    <input
+      type="text"
+      name="instructions"
+      value="{{recipe.instructions}}"
+      required
+    /><br /><br />
+
+    <label for="image">Recipe Image:</label>
+    <input type="file" name="recipe-cover-image" accept="image/*" /><br /><br />
+
+    <button type="submit">Update</button>
+  </form>
+</body>

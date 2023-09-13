@@ -1,0 +1,16 @@
+ <title>Recipe List</title>
+</head>
+<body>
+    <h1>Recipe List</h1>
+    <ul>
+        {{#each recipes}}
+        
+            <li><p>{{this.name}}</p>  <div><img src="{{this.imageUrl}}" alt="food photos"> </div>
+            <a href="/recipe/edit/{{this._id}}">Edit </a> <a href="/recipe/delete/{{this._id}}">Delete </a>
+            </li>
+                        
+
+        {{/each}}
+    </ul>
+</body>
+</html>
