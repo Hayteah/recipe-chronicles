@@ -2,6 +2,33 @@ const express = require("express");
 const recipeRouter = express.Router();
 const Recipe = require("../models/Recipe.model.js");
 const fileUploader = require("../config/cloudinary.config");
+const axios = require('axios');
+
+
+
+
+recipeRouter.get("/recipe/random", function (req, res, next) {
+  const API_URL = `http://www.themealdb.com/api/json/v1/1/random.php`
+  axios.get(API_URL)
+    .then(function (response) {
+      // Handle successful response
+      const data = response.data;
+      const recipe = data.meals[0];
+      const recipeName = recipe.strMeal;
+      const ingredients = [recipe.strIngredient1, recipe.strIngredient2];
+      const instructions = recipe.strInstructions;
+      const mealImage = recipe.strMealThumb;
+      console.log(recipeName, ingredients, instructions);
+      res.render("recipes/recipe-details", { data: recipe });
+
+    })
+    .catch(function (error) {
+      // Handle error
+      console.error('Error:', error);
+    });
+
+});
+
 
 //Adding recipe
 recipeRouter.get("/recipe/create", function (req, res, next) {
