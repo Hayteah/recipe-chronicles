@@ -1,5 +1,8 @@
 <h1>Delete Recipe</h1>
 <p>Are you sure you want to delete the recipe "{{recipe.name}}"?</p>
 <form action="/recipe/delete/{{recipe._id}}" method="post">
-  <button type="submit">Delete</button>
+  <button
+    class="btn btn-primary btn-dark btn-lg px-4 me-md-2"
+    type="submit"
+  >Delete</button>
 </form>

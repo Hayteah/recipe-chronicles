@@ -1,4 +1,3 @@
-// routes/auth.routes.js
 const bcryptjs = require("bcryptjs");
 const saltRounds = 10;
 const User = require("../models/User.model");
@@ -9,12 +8,9 @@ const router = new Router();
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
 const { default: axios } = require("axios");
 
-// GET route ==> to display the signup form to users
 router.get("/signup", isLoggedOut, (req, res) => res.render("auth/signup"));
 
-// POST route ==> to process form data
 router.post("/signup", isLoggedOut, (req, res, next) => {
-  //   console.log("The form data: ", req.body);
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -49,7 +45,6 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
       res.redirect("/userProfile");
     })
     .catch((error) => {
-      // copy the following if-else statement
       if (error instanceof mongoose.Error.ValidationError) {
         res.status(500).render("auth/signup", { errorMessage: error.message });
       } else if (error.code === 11000) {
@@ -103,27 +98,6 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     .catch((error) => next(error));
 });
 
-// router.get("/userProfile", isLoggedIn, (req, res) => {
-//   const { favourites } = req.session.currentUser;
-//   console.log(favourites);
-//   if (favourites.length) {
-//     const results = [];
-//     favourites.forEach((element) => {
-//       axios
-//         .get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${element}`)
-//         .then((resp) => results.push(resp.data.meals))
-//         .then(() => {
-//           console.log(results);
-//           res.send(results);
-//           return;
-//           res.render("users/user-profile", {
-//             userInSession: req.session.currentUser,
-//           });
-//         });
-//     });
-//   }
-// });
-
 router.get("/userProfile", isLoggedIn, (req, res) => {
   const { favourites } = req.session.currentUser;
   console.log(favourites);
@@ -131,7 +105,6 @@ router.get("/userProfile", isLoggedIn, (req, res) => {
   if (favourites.length) {
     const results = [];
 
-    // Use Promise.all to wait for all API calls to complete
     Promise.all(
       favourites.map(
         (element) =>
@@ -139,7 +112,7 @@ router.get("/userProfile", isLoggedIn, (req, res) => {
             .get(
               `http://www.themealdb.com/api/json/v1/1/lookup.php?i=${element}`
             )
-            .then((resp) => resp.data.meals[0]) // Extract the first meal from the response
+            .then((resp) => resp.data.meals[0])
       )
     )
       .then((meals) => {
@@ -147,7 +120,7 @@ router.get("/userProfile", isLoggedIn, (req, res) => {
 
         res.render("users/user-profile", {
           userInSession: req.session.currentUser,
-          favorites: meals, // Pass the favorite meals to the template
+          favorites: meals,
         });
       })
       .catch((error) => {
@@ -155,7 +128,6 @@ router.get("/userProfile", isLoggedIn, (req, res) => {
         res.status(500).send("Internal Server Error");
       });
   } else {
-    // If there are no favorites, render the profile without meals
     res.render("users/user-profile", {
       userInSession: req.session.currentUser,
       favorites: [],
@@ -169,4 +141,5 @@ router.post("/logout", isLoggedIn, (req, res, next) => {
     res.redirect("/");
   });
 });
+
 module.exports = router;

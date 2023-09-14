@@ -1,8 +1,21 @@
-<div>{{data.strMeal}}</div>
-<div><img src="{{data.strMealThumb}}" alt="" /></div>
-<div>{{data.strInstructions}}</div>
-<div>{{data.strIngredient1}}</div>
-<form action="/recipe/favorites" method="post">
+<div class="container">
+  <div class="custom-card">
+    <div>{{data.strMeal}}</div>
+    <div><img src="{{data.strMealThumb}}" alt="Recipe Image" /></div>
+    <div class="custom-instructions">{{data.strInstructions}}</div>
+    <div>{{data.strIngredient1}}</div>
+    <div>
+  <a
+    href="/recipe/random"
+    class="btn btn-outline-secondary btn-light btn-lg px-4 me-md-2"
+  >Random Recipe</a>
+</div>
+
+<form action="/recipe/favorites" method="POST">
   <input value="{{data.idMeal}}" name="favorite" hidden />
-  <button> add to favorites </button>
+  <div style="margin-top: 10px;">
+    <button class="btn btn-primary btn-dark btn-lg px-4 me-md-2">
+      Add to Favorite
+    </button>
+  </div>
 </form>

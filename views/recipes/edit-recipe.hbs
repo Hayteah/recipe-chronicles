@@ -1,32 +1,58 @@
-<body>
+<div class="container">
   <h1>Edit Recipe</h1>
   <form
     action="/recipe/update/{{recipe._id}}"
     method="post"
     enctype="multipart/form-data"
   >
-    <label for="name">Recipe Name:</label>
-    <input type="text" name="name" value="{{recipe.name}}" required /><br /><br
-    />
+    <div class="form-group">
+      <label for="name">Recipe Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        value="{{recipe.name}}"
+        required
+      />
+    </div>
 
-    <label for="ingredients">Ingredients:</label>
-    <textarea
-      name="ingredients"
-      rows="4"
-      required
-    >{{recipe.ingredients}}</textarea><br /><br />
+    <div class="form-group">
+      <label for="ingredients">Ingredients:</label>
+      <textarea
+        class="form-control"
+        id="ingredients"
+        name="ingredients"
+        rows="4"
+        required
+      >{{recipe.ingredients}}</textarea>
+    </div>
 
-    <label for="instructions">Instructions:</label>
-    <input
-      type="text"
-      name="instructions"
-      value="{{recipe.instructions}}"
-      required
-    /><br /><br />
+    <div class="form-group">
+      <label for="instructions">Instructions:</label>
+      <textarea
+        class="form-control"
+        id="instructions"
+        name="instructions"
+        rows="4"
+        required
+      >{{recipe.instructions}}</textarea>
+    </div>
 
-    <label for="image">Recipe Image:</label>
-    <input type="file" name="recipe-cover-image" accept="image/*" /><br /><br />
+    <div class="form-group">
+      <label for="image">Recipe Image:</label>
+      <input
+        type="file"
+        class="form-control-file"
+        id="image"
+        name="recipe-cover-image"
+        accept="image/*"
+      />
+    </div>
 
-    <button type="submit">Update</button>
+    <button
+      class="btn btn-primary btn-dark btn-lg px-4 me-md-2"
+      type="submit"
+    >Update</button>
   </form>
-</body>
+</div>
