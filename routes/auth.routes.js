@@ -92,7 +92,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         res.render("users/user-profile", { user });
 
         req.session.currentUser = user;
-        res.redirect("/userProfile");
+        res.redirect("/");
       } else {
         console.log("Incorrect password. ");
         res.render("auth/login", {

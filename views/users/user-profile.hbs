@@ -28,24 +28,34 @@
 {{#if userInSession}}
   <h2>Welcome, {{userInSession.username}}!</h2>
   <p>This is your profile page, my friend!</p>
-  <div><a href="/recipe/random">Random Recipe</a><a href="/recipe/create">Create Recipe</a></div>
 
   <h3>Your Favorite Recipes</h3>
-  <ul>
+  <ul class="favorites-ul">
     {{#each favorites}}
-      <li>
-        <strong>{{strMeal}}</strong> <!-- Assuming this contains the recipe name -->
-        <br>
-        <img src="{{strMealThumb}}" alt="{{strMeal}}" width="200">
-        <br>
-        {{strInstructions}}
-        <br>
-        Ingredients: {{strIngredient1}}, {{strIngredient2}}, ...
+      <li class="favorites-li">
+        <div class="image-title">
+          <strong>{{strMeal}}</strong>
+          <img src="{{strMealThumb}}" alt="{{strMeal}}" width="200" />
+        </div>
+        <div class="text-instruction">
+          <div>{{strIngredient1}},
+            {{strIngredient2}},
+            {{strIngredient3}},
+            {{strIngredient4}},
+            {{strIngredient5}},
+            {{strIngredient6}},
+            {{strIngredient7}},
+            {{strIngredient8}},
+            {{strIngredient9}},
+            {{strIngredient110}}
+          </div>
+
+          <div>{{strInstructions}}</div>
+
+        </div>
       </li>
     {{/each}}
   </ul>
-
-  
 
   <!-- ... (rest of your profile content) ... -->
 
@@ -54,4 +64,3 @@
   <br /><p>Still no logged-in user, sorry!</p>
 
 {{/if}}
-
