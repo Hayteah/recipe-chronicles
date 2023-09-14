@@ -1,8 +1,8 @@
 <div>{{data.strMeal}}</div>
-<div><img src="{{data.strMealThumb}}" alt=""></div>
+<div><img src="{{data.strMealThumb}}" alt="" /></div>
 <div>{{data.strInstructions}}</div>
 <div>{{data.strIngredient1}}</div>
 <form action="/recipe/favorites" method="post">
-    <input value="{{data.idMeal}}" name="favorite" hidden />
-    <button> add to favorites </button>
+  <input value="{{data.idMeal}}" name="favorite" hidden />
+  <button> add to favorites </button>
 </form>

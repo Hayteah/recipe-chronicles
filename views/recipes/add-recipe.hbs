@@ -1,14 +1,72 @@
-<h1>Add Recipe</h1>
-<form action="/recipe/create" method="POST" enctype="multipart/form-data">
-  <label for="name">Recipe Name:</label>
-  <input type="text" name="name" required /><br /><br />
-  <label for="image"> Image Url:</label>
-  <input type="file" name="recipe-cover-image" accept="image/*" required />
-  <label for="ingredients">Ingredients:</label>
-  <textarea name="ingredients" rows="4" required></textarea><br /><br />
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Recipe</title>
+    <!-- Add Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Add Custom CSS for Styling -->
 
-  <label for="instructions">Instructions:</label>
-  <input type="text" name="instructions" required /><br /><br />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mb-4">Add Recipe</h1>
+      <form action="/recipe/create" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Recipe Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input
+            type="file"
+            class="form-control-file"
+            id="image"
+            name="recipe-cover-image"
+            accept="image/*"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="ingredients">Ingredients</label>
+          <textarea
+            class="form-control"
+            id="ingredients"
+            name="ingredients"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="instructions">Instructions</label>
+          <input
+            type="text"
+            class="form-control"
+            id="instructions"
+            name="instructions"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
 
-  <button type="submit">Submit</button>
-</form>
+    <!-- Add Bootstrap JS and jQuery Scripts (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
+  </body>
+</html>

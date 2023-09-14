@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const { Router } = require("express");
 const router = new Router();
 const { isLoggedIn, isLoggedOut } = require("../middleware/route-guard.js");
+const { default: axios } = require("axios");
 
 // GET route ==> to display the signup form to users
 router.get("/signup", isLoggedOut, (req, res) => res.render("auth/signup"));
@@ -102,8 +103,64 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     .catch((error) => next(error));
 });
 
+// router.get("/userProfile", isLoggedIn, (req, res) => {
+//   const { favourites } = req.session.currentUser;
+//   console.log(favourites);
+//   if (favourites.length) {
+//     const results = [];
+//     favourites.forEach((element) => {
+//       axios
+//         .get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${element}`)
+//         .then((resp) => results.push(resp.data.meals))
+//         .then(() => {
+//           console.log(results);
+//           res.send(results);
+//           return;
+//           res.render("users/user-profile", {
+//             userInSession: req.session.currentUser,
+//           });
+//         });
+//     });
+//   }
+// });
+
 router.get("/userProfile", isLoggedIn, (req, res) => {
-  res.render("users/user-profile", { userInSession: req.session.currentUser });
+  const { favourites } = req.session.currentUser;
+  console.log(favourites);
+
+  if (favourites.length) {
+    const results = [];
+
+    // Use Promise.all to wait for all API calls to complete
+    Promise.all(
+      favourites.map(
+        (element) =>
+          axios
+            .get(
+              `http://www.themealdb.com/api/json/v1/1/lookup.php?i=${element}`
+            )
+            .then((resp) => resp.data.meals[0]) // Extract the first meal from the response
+      )
+    )
+      .then((meals) => {
+        console.log(meals);
+
+        res.render("users/user-profile", {
+          userInSession: req.session.currentUser,
+          favorites: meals, // Pass the favorite meals to the template
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      });
+  } else {
+    // If there are no favorites, render the profile without meals
+    res.render("users/user-profile", {
+      userInSession: req.session.currentUser,
+      favorites: [],
+    });
+  }
 });
 
 router.post("/logout", isLoggedIn, (req, res, next) => {

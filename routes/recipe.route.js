@@ -2,15 +2,13 @@ const express = require("express");
 const recipeRouter = express.Router();
 const Recipe = require("../models/Recipe.model.js");
 const fileUploader = require("../config/cloudinary.config");
-const axios = require('axios');
-const User = require('../models/User.model.js')
-
-
-
+const axios = require("axios");
+const User = require("../models/User.model.js");
 
 recipeRouter.get("/recipe/random", function (req, res, next) {
-  const API_URL = `http://www.themealdb.com/api/json/v1/1/random.php`
-  axios.get(API_URL)
+  const API_URL = `http://www.themealdb.com/api/json/v1/1/random.php`;
+  axios
+    .get(API_URL)
     .then(function (response) {
       // Handle successful response
       const data = response.data;
@@ -21,15 +19,12 @@ recipeRouter.get("/recipe/random", function (req, res, next) {
       const mealImage = recipe.strMealThumb;
       console.log(recipeName, ingredients, instructions);
       res.render("recipes/recipe-details", { data: recipe });
-
     })
     .catch(function (error) {
       // Handle error
-      console.error('Error:', error);
+      console.error("Error:", error);
     });
-
 });
-
 
 //Adding recipe
 recipeRouter.get("/recipe/create", function (req, res, next) {
@@ -125,13 +120,15 @@ recipeRouter.post("/recipe/delete/:recipeId", function (req, res, next) {
 });
 
 recipeRouter.post("/recipe/favorites", function (req, res, next) {
-  User.findByIdAndUpdate(
-    req.session.currentUser._id,
-    { $push: { favourites: req.body.favorite } }, { new: true }
-  )
-    .then((updatedUser) => {
-      console.log(updatedUser)
-    })
+  req.session.currentUser &&
+    User.findByIdAndUpdate(
+      req.session.currentUser._id,
+      { $push: { favourites: req.body.favorite } },
+      { new: true }
+    ).then((updatedUser) => {
+      req.session.currentUser = updatedUser;
+      res.redirect("/userProfile");
+    });
 
   // Recipe.findByIdAndDelete(recipeId)
   //   .then((deletedRecipe) => {

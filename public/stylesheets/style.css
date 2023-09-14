@@ -1,18 +1,21 @@
 body {
-  padding: 50px;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url("../images/callum-hill-APS55nWyRZg-unsplash\ \(1\).jpg");
+  background-image: url("../images/background10.png");
   background-repeat: no-repeat;
-  background-size: auto;
+  min-height: 100vh; /* Use viewport height to cover the entire screen */
+  background-size: cover;
+  background-position: center center;
 }
-
+/* 
 a {
   color: #00b7ff;
   text-decoration: none;
   font-size: 1.5em;
-}
+} */
 
-form {
+/* form {
   margin: 30px auto;
   width: 380px;
 }
@@ -36,7 +39,7 @@ form button {
 }
 
 form button {
-  background: #43a3e6;
+  background-color: transparent;
   border: 1px solid #43a3e6;
   border-radius: 4px;
   color: #fff;
@@ -54,7 +57,7 @@ form button:hover {
   background: #fff;
   color: #43a3e6;
   transition: 0.3s ease background;
-}
+} */
 
 .error {
   background: #f02b63;
@@ -66,7 +69,7 @@ form button:hover {
 }
 
 ul {
-  border-bottom: 2px solid #43a3e6;
+  border-bottom: 2px solid transparent;
   height: 30px;
   padding: 1em 0;
   list-style-type: none;
@@ -82,7 +85,7 @@ ul li {
 }
 
 #to-right span {
-  color: #43a3e6;
+  color: transparent;
   font-size: 1.5em;
 }
 
@@ -101,10 +104,116 @@ ul li {
   font-size: 2em;
 }
 
-#logout-form {
+/* #logout-form {
   display: inline;
+  background-color: transparent;
 }
 
 #logout-form button {
   width: 120px;
+} */
+
+body {
+  background-color: #f8f9fa;
+}
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  top: 50px;
+}
+.container h2 {
+  color: #333;
+}
+/* .form-group {
+  margin-bottom: 20px;
+}
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
+  box-shadow: none;
+  outline-color: transparent;
+}
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="email"]:focus {
+  border-bottom: 2px solid #007bff;
+}
+.form-group label {
+  color: #555;
+  font-weight: 600;
+}
+.btn-login {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+.btn-login:hover {
+  background-color: #0056b3;
+}
+.signup-link {
+  margin-top: 20px;
+  color: #007bff;
+} */
+/* 
+.home-img {
+  border-radius: 10px;
+  box-shadow: 0px 0px 6px 2px;
+  width: 100px;
+  height: 500px;
+} */
+
+/* .container-xxl {
+  max-width: 1530px;
+} */
+
+/* Add custom styles to the Bootstrap navbar */
+.navbar-custom {
+  background-color: transparent; /* Change the background color to your preferred color */
+}
+
+.navbar-custom .navbar-brand {
+  color: #333; /* Change the brand/logo text color */
+  font-weight: bold;
+}
+
+.navbar-custom .navbar-brand:hover {
+  color: #555; /* Change the brand/logo text color on hover */
+}
+
+.navbar-custom .navbar-nav .nav-link {
+  color: #333; /* Change the link text color */
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+  color: #555; /* Change the link text color on hover */
+}
+
+.navbar-custom .navbar-toggler-icon {
+  background-color: #fff; /* Change the color of the navbar toggle icon (hamburger icon) */
+}
+
+/* Optional: Add a box shadow to the navbar */
+.navbar-custom {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  text-align: left;
 }

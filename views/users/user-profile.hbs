@@ -1,12 +1,57 @@
-{{#if userInSession}}
-  <h2>Welcome, {{ userInSession.username }}!</h2>
+{{!-- {{#if userInSession}}
+  <h2>Welcome, {{userInSession.username}}!</h2>
   <p>This is your profile page my friend!</p>
-<div><a href="/recipe/random">Random Recipe</a><a href="/recipe/create">Create Recipe</a></div>
+  <div><a href="/recipe/random">Random Recipe</a><a href="/recipe/create">Create
+      Recipe</a></div>
+
+  <h3>Your Favorite Recipes</h3>
+  <ul>
+    {{#each userInSession.favorites}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
   <button>
     <a href="/userProfile">Reload the page</a>
   </button>
+
+  <h3>Received Data</h3>
+  <p>Data received from the /recipe/favorites route:</p>
+  <pre>
+    {{receivedData}}
+  </pre>
 {{else}}
+
+  <br /><p>Still no logged in user, sorry!</p>
+
+{{/if}} --}}
+
+{{#if userInSession}}
+  <h2>Welcome, {{userInSession.username}}!</h2>
+  <p>This is your profile page, my friend!</p>
+  <div><a href="/recipe/random">Random Recipe</a><a href="/recipe/create">Create Recipe</a></div>
+
+  <h3>Your Favorite Recipes</h3>
+  <ul>
+    {{#each favorites}}
+      <li>
+        <strong>{{strMeal}}</strong> <!-- Assuming this contains the recipe name -->
+        <br>
+        <img src="{{strMealThumb}}" alt="{{strMeal}}" width="200">
+        <br>
+        {{strInstructions}}
+        <br>
+        Ingredients: {{strIngredient1}}, {{strIngredient2}}, ...
+      </li>
+    {{/each}}
+  </ul>
+
   
-  <br><p>Still no logged in user, sorry!</p>
- 
+
+  <!-- ... (rest of your profile content) ... -->
+
+{{else}}
+
+  <br /><p>Still no logged-in user, sorry!</p>
+
 {{/if}}
+
